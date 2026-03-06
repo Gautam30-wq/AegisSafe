@@ -1,0 +1,144 @@
+:root {
+    /* --purple-dark: #4a148c; */
+    --purple-main: #6a1b9a;
+    --purple-light: #f3e5f5;
+    --text-dark: #1a1a1a;
+    --text-muted: #555555;
+    --bg-soft: #fafafa;
+    --border-grey: #e0e0e0;
+}
+
+/* * { box-sizing: border-box; margin: 0; padding: 0; } */
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #f6f1f5;
+    padding: 60px 20px;
+    line-height: 1.6;
+    color: #1a1a1a;
+}
+
+.container {
+    /* max-width: 1200px; */
+    margin: 0 2%;
+    display: flex;
+    flex-direction: column;
+    gap: 180px;
+}
+
+/* Header Section */
+.main-header { text-align: center; margin-bottom: 40px; }
+.eyebrow { color: var(--purple-main); text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; font-size: 0.85rem; }
+h1 { font-size: 3rem; margin: 15px 0; font-weight: 800; color: var(--purple-dark); }
+.main-header p { color: var(--text-muted); font-size: 1.15rem; max-width: 750px; margin: 0 auto; }
+
+/* Flexbox Content Rows */
+.content-row {
+    display: flex;
+    gap: 50px;/* gap between image and text */
+    align-items: flex-start;
+}
+
+.content-row.reverse { flex-direction: row-reverse; }
+
+/* The Large Image Cards */
+.card-image-box {
+    flex: 1;
+    /* height: 550px; */
+    height:30rem;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.bg-image-holder {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.8s ease;
+    z-index: 1;
+    /* width:100%; */
+}
+
+.card-image-box:hover .bg-image-holder { transform: scale(1.1); }
+
+.card-image-box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 70%);
+    z-index: 2;
+}
+
+.card-overlay-text { position: relative; z-index: 3; padding: 40px; color: white; }
+
+/* Header inside card */
+.gender-header { display: flex; align-items: center; margin-bottom: 15px; }
+.icon { background: var(--purple-main); width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; border-radius: 10px; margin-right: 15px; font-size: 1.3rem; }
+.card-overlay-text h3 { font-size: 2rem; margin: 0; font-weight: 700; }
+.card-overlay-text p { opacity: 0.9; font-size: 1.05rem; }
+
+/* Accordion Component */
+.accordion { display:flex;flex-direction:column; flex:1;gap:30px}
+.accordion-item { border-bottom: 1px solid var(--border-grey);transition: all 0.3s ease; }
+
+.accordion-header {
+    display: flex;
+    align-items: center;
+    padding: 26px;
+    cursor: pointer;
+    list-style: none; /* Hide default arrow */
+}
+
+.accordion-header::-webkit-details-marker { display: none; } /* Safari */
+
+.badge {
+    background: #f0f0f0;
+    color: var(--purple-main);
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold; margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.title { flex-grow: 1; font-weight: 700; font-size: 1.1rem }
+
+.icon-arrow {
+    border: solid var(--purple-main);
+    border-width: 0 2px 2px 0;
+    padding: 5px;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+/* Open Interactions */
+details[open] { background-color: var(--bg-soft); }
+details[open] .icon-arrow { transform: rotate(-135deg); }
+details[open] .badge { background-color: var(--purple-light); }
+
+.accordion-content {
+    padding: 0 80px 30px;
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.summary { font-weight: 700; font-size: 1.1rem; margin-bottom: 15px; color: #333; }
+.details-list { list-style: none; }
+.details-list li { position: relative; padding-left: 25px; margin-bottom: 12px; color: var(--text-muted); font-size: 0.95rem; }
+.details-list li::before { content: "•"; color: #c499d6; position: absolute; left: 0; top: -2px; font-size: 1.5rem; }
+
+/* Responsive Mobile View */
+@media (max-width: 1000px) {
+    .content-row, .content-row.reverse { flex-direction: column; }
+    .card-image-box { width: 100%; height: 400px; }
+    .accordion { width: 100%; }
+}
